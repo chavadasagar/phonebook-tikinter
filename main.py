@@ -43,18 +43,28 @@ def home():
 
         messagebox.showinfo(ph,"add successfuly!!!")
         
-    def update():
-        # for itm in t.selection():
-        #     i = t.item(itm)
-        #     data = i['values']
-        #     name.set(data[0])
-        #     phoneno.set(data[1])
+    def fetch():
+        for itm in t.selection():
+            i = t.item(itm)
+            data = i['values']
+            name.set(data[0])
+            phoneno.set(data[1])
         
         # last stop
 
+    def update():
+        if messagebox.showwarning("confirm","confirm update this contect no"):
+            phone.updatephno(name.get(),phoneno.get())
+            messagebox.showinfo("successfuly!!!","contect update success")
+        else:
+            messagebox.showinfo("cancal","update cancal")
 
     def delete():
-        pass
+        if messagebox.showwarning("confirm","confirm delete this contect ?"):
+            phone.deletephno(phoneno.get(),name.get())
+            messagebox.showinfo("deleted","delete success!!")
+        else:
+            messagebox.showinfo("cancal","delete cancal")
     
 
     # show data inside trree view 
@@ -80,6 +90,7 @@ def home():
     Button(ph,text="add",relief="solid",bd=1,command=add).place(x=60,y=170)
     Button(ph,text="Update",relief="solid",bd=1,command=update).place(x=110,y=170)
     Button(ph,text="Delete",relief="solid",bd=1,command=delete).place(x=170,y=170)
+    Button(ph,text="fetch",relief="solid",bd=1,command=fetch).place(x=225,y=170)
 
     
     ph.mainloop()

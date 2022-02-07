@@ -12,15 +12,19 @@ def savephno(name,phno):
     con.execute("insert into phone(name,phno) values(?,?)",data)
     con.commit()
     
-def updatephno(pid,name,phno):
-    data = (name,phno,pid)
-    con.execute("update phone set name=? ,phno=? where pid=?",data)
+def updatephno(name,phno):
+    data = (name,phno,name,phno)
+    con.execute("update phone set name=? ,phno=? where name=? and phno=?",data)
     con.commit()
     
-def deletephno(pid):
-    data = (pid)
-    con.execute("delete from phone where pid='"+pid+"'")
-    con.commit()
+# def deletephno(pid):
+#     data = (pid)
+#     con.execute("delete from phone where pid='"+pid+"'")
+#     con.commit()
+def deletephno(phno,name):
+    data = (phno,name)
+    con.execute("delete from phone where phno=? and name=?",data)
+    con.commit()    
 
 def getallphno():
     cur = con.execute("select * from phone")
